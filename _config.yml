@@ -1,0 +1,19 @@
+# Site settings
+title: visreg
+email: patrick-breheny@uiowa.edu
+description: "visreg: An R package for the visualization of regression models"
+url: "http://pbreheny.github.io/visreg"
+baseurl: ""
+github_username: pbreheny
+
+# Build settings
+markdown: kramdown
+exclude: [Makefile]
+
+# Defaults
+defaults:
+  -
+    scope:
+      path: ""
+    values:
+      layout: "default"
