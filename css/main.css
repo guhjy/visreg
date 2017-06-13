@@ -113,9 +113,14 @@ pre {
 
 /* Site header */
 .site-header {
+  width: 100%;
   border-bottom: 1px solid #e8e8e8;
   min-height: 56px;
-  box-shadow: 0 3px 15px 0px rgba(0, 0, 0, 0.1);
+  position: fixed;
+  display: block;
+  top: 0;
+  background-color: #2fa4e7;
+  color: #fff;
 }
 
 .site-title {
@@ -123,11 +128,11 @@ pre {
   line-height: 56px;
   letter-spacing: -1px;
   margin-bottom: 0;
-  float: left; }
-  .site-title, .site-title:visited {
-    color: #424242;
+  float: left;
 }
-
+.site-title, .site-title:visited {
+    color: #fff;
+}
 .site-description {
   float: right;
   padding-top: 15px;
@@ -200,7 +205,9 @@ pre {
 
 /* Page content */
 .page-content {
-  padding: 30px; }
+  padding: 30px;
+  margin-top: 50px;
+}
 
 .page-heading {
   font-size: 20px; }

@@ -1,2 +1,2 @@
-_site/index.html: *.md
+_site/index.html: *.md css/main.css
 	jekyll b
