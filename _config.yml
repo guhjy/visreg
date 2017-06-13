@@ -8,7 +8,10 @@ github_username: pbreheny
 
 # Build settings
 markdown: kramdown
-exclude: [Makefile]
+exclude: [Makefile, src]
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
 
 # Defaults
 defaults:

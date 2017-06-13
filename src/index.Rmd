@@ -9,25 +9,28 @@ This site is under construction at the moment, but new material is being added d
 
 `visreg` is on CRAN, so it can be installed via:
 
-
-```r
+```{r eval=FALSE}
 install.packages("visreg")
 ```
 
+```{r include=FALSE}
+library(visreg)
+opts_knit$set(aliases=c(h = 'fig.height', w = 'fig.width'), global.par=TRUE)
+```
 
-
+```{r fake, echo=FALSE}
+par(mar=c(5,5,0.5,0.5))
+plot(1:10)
+```
 
 # Quick start guide
 
 The basic idea of `visreg` is that you fit some type of model, then pass that model to visreg to be plotted:
 
-
-```r
+```{r h=5, w=5}
 fit <- lm(Ozone ~ Solar.R + Wind + Temp, data=airquality)
 visreg(fit, "Wind")
 ```
-
-![plot of chunk unnamed-chunk-3](img/unnamed-chunk-3-1.png)
 
 The result is a plot of how the expected value of the outcome (Ozone) changes as a function of `x` (Wind), with all other variables in the model held fixed.
 
@@ -35,14 +38,11 @@ A `visreg` plot includes (1) the expected value (blue line) (2) a confidence int
 
 Again, this works with any kind of model, not just linear regression models.  Here is a Cox proportional hazards model with an interaction:
 
-
-```r
+```{r h=4, w=8, message=FALSE}
 library(survival)
 fit <- coxph(Surv(time, status!=0) ~ bili*hepato, data=pbc)
 visreg(fit, "bili", "hepato", ylab="log(Hazard ratio)", gg=TRUE)
 ```
-
-![plot of chunk unnamed-chunk-4](img/unnamed-chunk-4-1.png)
 
 In this plot, we see how the hazard changes as a function of bilirubin levels for patients with/without an enlarged liver.  For more on this type of plot, see [Cross-sectional plots](cross-section).  For more on using `visreg` with `ggplot2`, see [Visreg and ggplot2](gg.html).
 
