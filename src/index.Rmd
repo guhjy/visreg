@@ -1,9 +1,20 @@
 ---
 ---
+```{r include=FALSE}
+library(visreg)
+opts_knit$set(aliases=c(h = 'fig.height', w = 'fig.width'), global.par=TRUE)
+opts_chunk$set(fig.path='img/index-')
+```
+```{r fake, echo=FALSE, results='hide'}
+par(mar=c(5,5,0.5,0.5))
+plot(1:10)
+```
 
-`visreg` is an R package for displaying the results of a fitted model in terms of how a predictor variable `x` is estimated to affect an outcome `y`.  `visreg` is implemented in an entirely object-oriented manner, meaning that it works with virtually any type of (formula-based) model class in R, provided that the model class provides a `predict` method.
+`visreg` is an R package for displaying the results of a fitted model in terms of how a predictor variable `x` is estimated to affect an outcome `y`.  The implementation of `visreg` takes full advantage of object-oriented programming in R, meaning that it works with virtually any type of (formula-based) model class in R provided that the model class provides a `predict` method.
 
-This site is under construction at the moment, but new material is being added daily.
+This site focuses mainly on illustrating the ideas and syntax of `visreg` as a way of providing online documentation.  For more on the technical details of `visreg`, [see the (hopefully soon-to-be published) article](http://myweb.uiowa.edu/pbreheny/publications/visreg.pdf).
+
+NOTE: This site is under construction at the moment, but new material is being added daily.
 
 # Installation
 
@@ -11,16 +22,6 @@ This site is under construction at the moment, but new material is being added d
 
 ```{r eval=FALSE}
 install.packages("visreg")
-```
-
-```{r include=FALSE}
-library(visreg)
-opts_knit$set(aliases=c(h = 'fig.height', w = 'fig.width'), global.par=TRUE)
-```
-
-```{r fake, echo=FALSE}
-par(mar=c(5,5,0.5,0.5))
-plot(1:10)
 ```
 
 # Quick start guide
@@ -34,36 +35,51 @@ visreg(fit, "Wind")
 
 The result is a plot of how the expected value of the outcome (Ozone) changes as a function of `x` (Wind), with all other variables in the model held fixed.
 
-A `visreg` plot includes (1) the expected value (blue line) (2) a confidence interval for the expected value (gray band), and (3) partial residuals (dark gray dots).  For more technical details, [see the (hopefully soon-to-be) published article](http://myweb.uiowa.edu/pbreheny/publications/visreg.pdf).
+A `visreg` plot includes (1) the expected value (blue line) (2) a confidence interval for the expected value (gray band), and (3) partial residuals (dark gray dots).  
 
 Again, this works with any kind of model, not just linear regression models.  Here is a Cox proportional hazards model with an interaction:
 
 ```{r h=4, w=8, message=FALSE}
 library(survival)
 fit <- coxph(Surv(time, status!=0) ~ bili*hepato, data=pbc)
-visreg(fit, "bili", "hepato", ylab="log(Hazard ratio)", gg=TRUE)
+visreg(fit, "bili", "hepato", ylab="log(Hazard ratio)")
 ```
 
-In this plot, we see how the hazard changes as a function of bilirubin levels for patients with/without an enlarged liver.  For more on this type of plot, see [Cross-sectional plots](cross-section).  For more on using `visreg` with `ggplot2`, see [Visreg and ggplot2](gg.html).
+In this plot, we see how the hazard changes as a function of bilirubin levels for patients with/without an enlarged liver.  For more on this type of plot, see [Cross-sectional plots](cross-section).  
 
-# Extended documentation and examples
+The models do not have to be linear, and we have the option of using `ggplot2` as the graphics engine:
 
-## Basic framework
+```{r h=3, w=9, message=FALSE}
+library(mgcv)
+airquality$Heat <- cut(airquality$Temp, 3, labels=c("Cool", "Mild", "Hot"))
+fit <- gam(Ozone ~ s(Wind, by=Heat, sp=0.1), data=airquality)
+visreg(fit, "Wind", "Heat", gg=TRUE, ylab="Ozone")
+```
 
-* [Getting started](basic.html)
-* [Conditional vs. contrast plots](conditional-contrast.html)
-* [Transformations](transformations.html)
-* [Conditioning](conditioning.html)
-* [Plot options](options.html)
-* [Visreg and ggplot2](gg.html)
+For more on using `visreg` with `ggplot2`, see [Visreg and ggplot2](gg.html).
 
-## Models with interactions
+A number of options for [surface plots](surface.html) are also provided, such as `rgl` plots:
 
-* [Cross-sectional plots](cross-section)
-* [Surface plots](surface)
+```{r message=FALSE, results='hide'}
+library(splines)
+fit <- lm(Ozone ~ Solar.R +ns(Wind, df=2)*ns(Temp, df=2), data=airquality)
+visreg2d(fit, "Wind", "Temp", plot.type="rgl")
+```
 
-## More on specific model classes
+```{r include=FALSE}
+require(rgl)
+visreg2d(fit, "Wind", "Temp", plot.type="rgl")
+htmlwidgets::saveWidget(rgl::rglwidget(), "rgl.html")
+system("mv rgl.html img")
+```
 
-* [GLMs](glm)
-* [Random forests, support vector machines, and other "black box" methods](blackbox)
-* [Mixed models](random-effect)
+<div class="container" style="width: 100%">
+  <div class="row-fluid">
+    <iframe class="span12" 
+	    style="border: none; height: 510px; width: 100%"
+	    src="img/rgl.html">
+    </iframe>
+  </div>
+</div>
+
+If your browser supports WebGL, you should be able to interact with the above plot, rotating it around to explore the surface.
