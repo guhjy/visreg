@@ -40,4 +40,3 @@ airquality$Heat <- cut(airquality$Temp, 3, labels=c("Cool", "Mild", "Hot"))
 fit <- lm(Ozone ~ Solar.R + Wind + Heat, data=airquality)
 visreg(fit, "Heat")
 ```
-

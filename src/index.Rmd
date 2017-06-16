@@ -47,9 +47,9 @@ visreg(fit, "bili", "hepato", ylab="log(Hazard ratio)")
 
 In this plot, we see how the hazard changes as a function of bilirubin levels for patients with/without an enlarged liver.  For more on this type of plot, see [Cross-sectional plots](cross-section).  
 
-The models do not have to be linear, and we have the option of using `ggplot2` as the graphics engine:
+<p id="gam">The models do not have to be linear, and we have the option of using `ggplot2` as the graphics engine:</p>
 
-```{r h=3, w=9, message=FALSE}
+```{r h=4, w=12, message=FALSE}
 library(mgcv)
 airquality$Heat <- cut(airquality$Temp, 3, labels=c("Cool", "Mild", "Hot"))
 fit <- gam(Ozone ~ s(Wind, by=Heat, sp=0.1), data=airquality)

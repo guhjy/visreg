@@ -170,7 +170,6 @@ h3{
     display:none;
 }
 
-/* Syntax highlighting style (from rougify style github) */
 .highlight table td { padding: 5px; }
 .highlight table pre { margin: 0; }
 .highlight .cm {
@@ -378,5 +377,8 @@ h3{
   color: #bbbbbb;
 }
 .highlight {
-  background-color: #f8f8f8;
+  padding: 10px;
+}
+.highlighter-rouge {
+  background-color: rgba(27,31,35,0.05);
 }

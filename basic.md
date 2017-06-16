@@ -50,4 +50,3 @@ visreg(fit, "Heat")
 ```
 
 ![plot of chunk unnamed-chunk-5](img/basic-unnamed-chunk-5-1.png)
-
