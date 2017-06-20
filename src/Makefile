@@ -1,4 +1,5 @@
 all: index.Rmd
+	knit cross-section.Rmd
 	knitall *.Rmd
 	sed -i '/chunk fake/d' *.md
 	sed -i 's/"padding":15/"padding":0/g' img/rgl.html

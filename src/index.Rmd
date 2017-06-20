@@ -69,7 +69,7 @@ visreg2d(fit, "Wind", "Temp", plot.type="rgl")
 ```{r include=FALSE}
 require(rgl)
 visreg2d(fit, "Wind", "Temp", plot.type="rgl")
-htmlwidgets::saveWidget(rgl::rglwidget(), "rgl.html")
+htmlwidgets::saveWidget(rgl::rglwidget(elementId="rgl77053"), "rgl.html")
 system("mv rgl.html img")
 ```
 
