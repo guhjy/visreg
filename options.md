@@ -121,4 +121,3 @@ visreg(fit, "Heat", whitespace=.5)
 ```
 ## Error in setupF(fit, xvar, parent.frame()): Heat not in model
 ```
-
