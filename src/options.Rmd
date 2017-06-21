@@ -3,7 +3,8 @@
 
 ```{r include=FALSE}
 library(visreg)
-opts_knit$set(aliases=c(h = 'fig.height', w = 'fig.width'), global.par=TRUE)
+opts_knit$set(aliases=c(h = 'fig.height', w = 'fig.width'))
+opts_knit$set(global.par=TRUE)
 opts_chunk$set(fig.path='img/options-')
 ```
 ```{r fake, echo=FALSE, results='hide'}
@@ -13,7 +14,7 @@ plot(1:10)
 
 `visreg` tries to set up pleasant-looking default options, but everything can be tailored to user specifications.  For the plots below, we work from this general model:
 
-```{r, h=5, w=5}
+```{r mod, h=5, w=5, cache=TRUE}
 airquality$Heat <- cut(airquality$Temp, 3, labels=c("Cool", "Mild", "Hot"))
 fit <- lm(Ozone ~ Solar.R + Wind + Heat, data=airquality)
 ```
@@ -22,24 +23,37 @@ fit <- lm(Ozone ~ Solar.R + Wind + Heat, data=airquality)
 
 By default, `visreg` includes the fitted line, confidence bands, and partial residuals, but the residuals and the bands can be turned off:
 
-```{r h=5, w=5}
+```{r noband, h=5, w=5, cache=TRUE}
 visreg(fit, "Wind", band=FALSE)
 ```
 
-```{r h=5, w=5}
+```{r nopartial, h=5, w=5, cache=TRUE}
 visreg(fit, "Wind", partial=FALSE)
 ```
 
 Note that by default, when you turn off partial residuals, visreg tries to display a rug so you can at least see where the observations are.  You can turn this off too:
 
-```{r h=5, w=5}
+```{r nopartial_norug, h=5, w=5, cache=TRUE}
 visreg(fit, "Wind", partial=FALSE, rug=FALSE)
 ```
 
 Finally, there is an option for displaying separate rugs for positive and negative residuals on the top and bottom axes, respectively, with `rug=2` (this is particularly useful for [logistic regression](glm.html)):
 
-```{r h=5, w=5}
+```{r rug2, h=5, w=5, cache=TRUE}
 visreg(fit, "Wind", rug=2, partial=FALSE)
+```
+
+# Jittering
+
+If there are many ties in a numeric variable `x`, jittering can be helpful way to avoid overplotting:
+
+```{r nojit, h=5, w=5, cache=TRUE}
+fit <- lm(Ozone ~ Solar.R + Wind + poly(Month, 2), data=airquality)
+visreg(fit, "Month")
+```
+
+```{r jit, h=5, w=5, dependson="nojit", cache=TRUE}
+visreg(fit, "Month", jitter=TRUE)
 ```
 
 # Appearance of points, lines, and bands
@@ -52,17 +66,17 @@ Specifying `col='red'` won't work, because `visreg` can't know whether you're tr
 
 Each of these can be abbreviated, as in the example below:
 
-```{r h=5, w=5}
+```{r aes, h=5, w=5, cache=TRUE}
 visreg(fit, "Wind", line=list(col="red"),
                     fill=list(col="green"),
                     points=list(cex=1.5, pch=1))
 ```
 
-# General plot options
+# Generic plot options
 
 Other options get passed along to `plot`, so any option that you could normally pass to `plot`, like `main`, will work fine.  Here's an example that includes a bunch of options like this:
 
-```{r h=5, w=5}
+```{r generic, h=5, w=5, cache=TRUE}
 tfit <- lm(log(Ozone) ~ Solar.R + Wind + Temp, data=airquality)
 visreg(tfit, "Wind", yaxt="n", main="Ozone is bad for you", bty="n", ylab="Ozone")
 at <- seq(1.5, 5, 0.5)
@@ -74,7 +88,7 @@ axis(2, at=at, lab=lab, las=1)
 
 When `x` is a factor, the `whitespace` option controls the amount of whitespace in between the categories:
 
-```{r h=4, w=8}
+```{r whitespace, h=4, w=8, cache=TRUE}
 par(mfrow=c(1,2))
 visreg(fit, "Heat", whitespace=.1)
 visreg(fit, "Heat", whitespace=.5)

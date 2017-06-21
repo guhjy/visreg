@@ -27,7 +27,7 @@ fit <- lm(Ozone ~ Solar.R + Wind + Temp, data=airquality)
 visreg(fit, "Wind")
 ```
 
-![plot of chunk unnamed-chunk-3](img/index-unnamed-chunk-3-1.png)
+![plot of chunk wind](img/index-wind-1.png)
 
 The result is a plot of how the expected value of the outcome (Ozone) changes as a function of `x` (Wind), with all other variables in the model held fixed.
 
@@ -42,11 +42,13 @@ fit <- coxph(Surv(time, status!=0) ~ bili*hepato, data=pbc)
 visreg(fit, "bili", "hepato", ylab="log(Hazard ratio)")
 ```
 
-![plot of chunk unnamed-chunk-4](img/index-unnamed-chunk-4-1.png)
+![plot of chunk cox](img/index-cox-1.png)
 
-In this plot, we see how the hazard changes as a function of bilirubin levels for patients with/without an enlarged liver.  For more on this type of plot, see [Cross-sectional plots](cross-section).  
+In this plot, we see how the hazard changes as a function of bilirubin levels for patients with/without an enlarged liver.  For more on this type of plot, see [Cross-sectional plots](cross).  
 
-<p id="gam">The models do not have to be linear, and we have the option of using `ggplot2` as the graphics engine:</p>
+<div id="gam"></div>
+
+The models do not have to be linear, and we have the option of using `ggplot2` as the graphics engine:
 
 
 ```r
@@ -56,7 +58,7 @@ fit <- gam(Ozone ~ s(Wind, by=Heat, sp=0.1), data=airquality)
 visreg(fit, "Wind", "Heat", gg=TRUE, ylab="Ozone")
 ```
 
-![plot of chunk unnamed-chunk-5](img/index-unnamed-chunk-5-1.png)
+![plot of chunk mgcv](img/index-mgcv-1.png)
 
 For more on using `visreg` with `ggplot2`, see [Visreg and ggplot2](gg.html).
 
@@ -69,12 +71,10 @@ fit <- lm(Ozone ~ Solar.R +ns(Wind, df=2)*ns(Temp, df=2), data=airquality)
 visreg2d(fit, "Wind", "Temp", plot.type="rgl")
 ```
 
-
-
 <div class="container" style="width: 100%">
   <div class="row-fluid">
     <iframe class="span12" 
-	    style="border: none; height: 510px; width: 100%"
+	    style="border: none; height: 484px; width: 100%"
 	    src="img/rgl.html">
     </iframe>
   </div>

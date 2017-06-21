@@ -3,7 +3,7 @@
 
 
 
-As noted in [getting started](basic.html), the default behavior of `visreg` when constructing a conditional plot is to fill in the other variables with either the median (for continuous variables) or the most common category (for categorical variables).  This can be modified using the `cond` argument, which offers more explicit control over what to condition on.  Note that this has no bearing on contrast plots (at least, in the absence of interactions), which do not depend on the other terms in the model.
+As noted in [getting started](basic), the default behavior of `visreg` when constructing a conditional plot is to fill in the other variables with either the median (for continuous variables) or the most common category (for categorical variables).  This can be modified using the `cond` argument, which offers more explicit control over what to condition on.  Note that this has no bearing on contrast plots (at least, in the absence of interactions), which do not depend on the other terms in the model.
 
 The `cond` argument must be provided as a named list.  Each element of that list specifies the value for one of the terms in the model; any elements left unspecified are filled in with the median/most common category.  For example, let's construct the a plot of wind vs. ozone, but condition on three different values for temperature: (1) a cold temperature of 50 degrees (2) the default median temperature of 79 degrees and (3) a hot temperature of 100 degrees.
 
@@ -16,7 +16,7 @@ visreg(fit, "Wind")
 visreg(fit, "Wind", cond=list(Temp=100))
 ```
 
-<img src="img/conditioning-unnamed-chunk-2-1.png" title="plot of chunk unnamed-chunk-2" alt="plot of chunk unnamed-chunk-2" width="100%" />
+<img src="img/cond-wind_temp-1.png" title="plot of chunk wind_temp" alt="plot of chunk wind_temp" width="100%" />
 
 A few observations/remarks:
 

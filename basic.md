@@ -26,18 +26,18 @@ As the summary indicates, wind and temperature have clear effects on ozone, wher
 visreg(fit, "Wind")
 ```
 
-![plot of chunk unnamed-chunk-3](img/basic-unnamed-chunk-3-1.png)
+![plot of chunk wind](img/basic-wind-1.png)
 
 
 ```r
 visreg(fit, "Solar.R")
 ```
 
-![plot of chunk unnamed-chunk-4](img/basic-unnamed-chunk-4-1.png)
+![plot of chunk solar](img/basic-solar-1.png)
 
 The visual summaries reinforce the numeric ones: Wind has an undeniable negative association with ozone, whereas the effect of solar radiation is just barely significant: you can try adding `abline(h=44.5, lty=2)` to the above plot to see that the gray band just barely excludes a flat line.
 
-All aspects of the above plot (the line, the partial residuals, the band) depend on the specification of not only `Solar.R` but also of all the other terms in the model.  In other words, the result is fully conditional on all components of the predictor; in `visreg`, this type of plot is called a *conditional* plot, and it is the default type.  By default, the other terms in the model are set to their median if the term is numeric or the most common category if the term is a factor.  Changing these defaults is disucssed in [conditioning](conditioning.html).
+All aspects of the above plot (the line, the partial residuals, the band) depend on the specification of not only `Solar.R` but also of all the other terms in the model.  In other words, the result is fully conditional on all components of the predictor; in `visreg`, this type of plot is called a *conditional* plot, and it is the default type.  By default, the other terms in the model are set to their median if the term is numeric or the most common category if the term is a factor.  Changing these defaults is disucssed in [conditioning](cond).
 
 In addition to continuous explanatory variables, `visreg` also allows the easy visualization of differences between the levels of categorical variables.  The following block of code creates a factor called `Heat` by discretizing `Temp`, and then visualizes its relationship with `Ozone`:
 
@@ -49,4 +49,6 @@ fit <- lm(Ozone ~ Solar.R + Wind + Heat, data=airquality)
 visreg(fit, "Heat")
 ```
 
-![plot of chunk unnamed-chunk-5](img/basic-unnamed-chunk-5-1.png)
+![plot of chunk heat](img/basic-heat-1.png)
+
+Change some text.

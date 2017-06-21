@@ -3,7 +3,8 @@
 
 ```{r include=FALSE}
 library(visreg)
-opts_knit$set(aliases=c(h = 'fig.height', w = 'fig.width'), global.par=TRUE)
+opts_knit$set(aliases=c(h = 'fig.height', w = 'fig.width'))
+opts_knit$set(global.par=TRUE)
 opts_chunk$set(fig.path='img/basic-')
 ```
 ```{r fake, echo=FALSE, results='hide'}
@@ -13,18 +14,18 @@ plot(1:10)
 
 Let's begin with a simple, additive, linear model:
 
-```{r}
+```{r mod}
 fit <- lm(Ozone ~ Solar.R + Wind + Temp, data=airquality)
 summary(fit)$coef
 ```
 
 As the summary indicates, wind and temperature have clear effects on ozone, whereas solar radiation has a more subtle effect.  Visual summaries are often more informative and clear than numerical summaries.  Let's see what `visreg` provides:
 
-```{r, h=5, w=5}
+```{r wind, h=5, w=5, cache=TRUE}
 visreg(fit, "Wind")
 ```
 
-```{r, h=5, w=5}
+```{r solar, h=5, w=5, cache=TRUE}
 visreg(fit, "Solar.R")
 ```
 
@@ -35,7 +36,7 @@ All aspects of the above plot (the line, the partial residuals, the band) depend
 In addition to continuous explanatory variables, `visreg` also allows the easy visualization of differences between the levels of categorical variables.  The following block of code creates a factor called `Heat` by discretizing `Temp`, and then visualizes its relationship with `Ozone`:
 
 
-```{r, h=5, w=5}
+```{r heat, h=5, w=5, cache=TRUE}
 airquality$Heat <- cut(airquality$Temp, 3, labels=c("Cool", "Mild", "Hot"))
 fit <- lm(Ozone ~ Solar.R + Wind + Heat, data=airquality)
 visreg(fit, "Heat")

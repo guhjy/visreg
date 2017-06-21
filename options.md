@@ -20,14 +20,14 @@ By default, `visreg` includes the fitted line, confidence bands, and partial res
 visreg(fit, "Wind", band=FALSE)
 ```
 
-![plot of chunk unnamed-chunk-3](img/options-unnamed-chunk-3-1.png)
+![plot of chunk noband](img/options-noband-1.png)
 
 
 ```r
 visreg(fit, "Wind", partial=FALSE)
 ```
 
-![plot of chunk unnamed-chunk-4](img/options-unnamed-chunk-4-1.png)
+![plot of chunk nopartial](img/options-nopartial-1.png)
 
 Note that by default, when you turn off partial residuals, visreg tries to display a rug so you can at least see where the observations are.  You can turn this off too:
 
@@ -36,7 +36,7 @@ Note that by default, when you turn off partial residuals, visreg tries to displ
 visreg(fit, "Wind", partial=FALSE, rug=FALSE)
 ```
 
-![plot of chunk unnamed-chunk-5](img/options-unnamed-chunk-5-1.png)
+![plot of chunk nopartial_norug](img/options-nopartial_norug-1.png)
 
 Finally, there is an option for displaying separate rugs for positive and negative residuals on the top and bottom axes, respectively, with `rug=2` (this is particularly useful for [logistic regression](glm.html)):
 
@@ -45,7 +45,26 @@ Finally, there is an option for displaying separate rugs for positive and negati
 visreg(fit, "Wind", rug=2, partial=FALSE)
 ```
 
-![plot of chunk unnamed-chunk-6](img/options-unnamed-chunk-6-1.png)
+![plot of chunk rug2](img/options-rug2-1.png)
+
+# Jittering
+
+If there are many ties in a numeric variable `x`, jittering can be helpful way to avoid overplotting:
+
+
+```r
+fit <- lm(Ozone ~ Solar.R + Wind + poly(Month, 2), data=airquality)
+visreg(fit, "Month")
+```
+
+![plot of chunk nojit](img/options-nojit-1.png)
+
+
+```r
+visreg(fit, "Month", jitter=TRUE)
+```
+
+![plot of chunk jit](img/options-jit-1.png)
 
 # Appearance of points, lines, and bands
 
@@ -64,9 +83,9 @@ visreg(fit, "Wind", line=list(col="red"),
                     points=list(cex=1.5, pch=1))
 ```
 
-![plot of chunk unnamed-chunk-7](img/options-unnamed-chunk-7-1.png)
+![plot of chunk aes](img/options-aes-1.png)
 
-# General plot options
+# Generic plot options
 
 Other options get passed along to `plot`, so any option that you could normally pass to `plot`, like `main`, will work fine.  Here's an example that includes a bunch of options like this:
 
@@ -79,7 +98,7 @@ lab <- round(exp(at), 1)
 axis(2, at=at, lab=lab, las=1)
 ```
 
-![plot of chunk unnamed-chunk-8](img/options-unnamed-chunk-8-1.png)
+![plot of chunk generic](img/options-generic-1.png)
 
 # Whitespace for factors
 
@@ -89,8 +108,17 @@ When `x` is a factor, the `whitespace` option controls the amount of whitespace 
 ```r
 par(mfrow=c(1,2))
 visreg(fit, "Heat", whitespace=.1)
+```
+
+```
+## Error in setupF(fit, xvar, parent.frame()): Heat not in model
+```
+
+```r
 visreg(fit, "Heat", whitespace=.5)
 ```
 
-![plot of chunk unnamed-chunk-9](img/options-unnamed-chunk-9-1.png)
+```
+## Error in setupF(fit, xvar, parent.frame()): Heat not in model
+```
 
