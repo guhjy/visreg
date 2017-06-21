@@ -77,8 +77,8 @@ visreg(fit, "Wind", line=list(col="red"),
 Other options get passed along to `plot`, so any option that you could normally pass to `plot`, like `main`, will work fine.  Here's an example that includes a bunch of options like this:
 
 ```{r generic, h=5, w=5, cache=TRUE}
-tfit <- lm(log(Ozone) ~ Solar.R + Wind + Temp, data=airquality)
-visreg(tfit, "Wind", yaxt="n", main="Ozone is bad for you", bty="n", ylab="Ozone")
+fit <- lm(log(Ozone) ~ Solar.R + Wind + Temp, data=airquality)
+visreg(fit, "Wind", yaxt="n", main="Ozone is bad for you", bty="n", ylab="Ozone")
 at <- seq(1.5, 5, 0.5)
 lab <- round(exp(at), 1)
 axis(2, at=at, lab=lab, las=1)
@@ -89,6 +89,7 @@ axis(2, at=at, lab=lab, las=1)
 When `x` is a factor, the `whitespace` option controls the amount of whitespace in between the categories:
 
 ```{r whitespace, h=4, w=8, cache=TRUE}
+fit <- lm(Ozone ~ Solar.R + Wind + Heat, data=airquality)
 par(mfrow=c(1,2))
 visreg(fit, "Heat", whitespace=.1)
 visreg(fit, "Heat", whitespace=.5)

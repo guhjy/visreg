@@ -91,8 +91,8 @@ Other options get passed along to `plot`, so any option that you could normally 
 
 
 ```r
-tfit <- lm(log(Ozone) ~ Solar.R + Wind + Temp, data=airquality)
-visreg(tfit, "Wind", yaxt="n", main="Ozone is bad for you", bty="n", ylab="Ozone")
+fit <- lm(log(Ozone) ~ Solar.R + Wind + Temp, data=airquality)
+visreg(fit, "Wind", yaxt="n", main="Ozone is bad for you", bty="n", ylab="Ozone")
 at <- seq(1.5, 5, 0.5)
 lab <- round(exp(at), 1)
 axis(2, at=at, lab=lab, las=1)
@@ -106,18 +106,10 @@ When `x` is a factor, the `whitespace` option controls the amount of whitespace 
 
 
 ```r
+fit <- lm(Ozone ~ Solar.R + Wind + Heat, data=airquality)
 par(mfrow=c(1,2))
 visreg(fit, "Heat", whitespace=.1)
-```
-
-```
-## Error in setupF(fit, xvar, parent.frame()): Heat not in model
-```
-
-```r
 visreg(fit, "Heat", whitespace=.5)
 ```
 
-```
-## Error in setupF(fit, xvar, parent.frame()): Heat not in model
-```
+![plot of chunk whitespace](img/options-whitespace-1.png)
