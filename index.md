@@ -81,3 +81,4 @@ visreg2d(fit, "Wind", "Temp", plot.type="rgl")
 </div>
 
 If your browser supports WebGL, you should be able to interact with the above plot, rotating it around to explore the surface.
+
