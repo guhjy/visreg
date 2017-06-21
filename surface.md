@@ -60,4 +60,3 @@ visreg2d(fit, "Wind", "Temp", plot.type="rgl")
 </div>
 
 For the interactive `rgl` option, you will need to install the `rgl` package first.
-
