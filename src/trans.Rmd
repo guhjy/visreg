@@ -64,3 +64,4 @@ As one would hope, nonlinear terms and outcome transformations can be combined a
 fit <- lm(log(Ozone) ~ Solar.R + Wind + I(Wind^2) + Temp, data=airquality)
 visreg(fit, "Wind", trans=exp, ylab="Ozone", partial=TRUE)
 ```
+

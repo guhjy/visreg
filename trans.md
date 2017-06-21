@@ -73,3 +73,4 @@ visreg(fit, "Wind", trans=exp, ylab="Ozone", partial=TRUE)
 ```
 
 ![plot of chunk transboth](img/trans-transboth-1.png)
+
