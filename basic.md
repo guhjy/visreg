@@ -19,25 +19,38 @@ summary(fit)$coef
 ## Temp          1.65209291  0.25352979  6.516366 2.423506e-09
 ```
 
-As the summary indicates, wind and temperature have clear effects on ozone, whereas solar radiation has a more subtle effect.  Visual summaries are often more informative and clear than numerical summaries.  Let's see what `visreg` provides:
+As the summary indicates, temperature has a clear positive effect on ozone, wind has a clear negative effect, and solar radiation has a more subtle effect: somewhat positive but could be due to random chance.  Visual summaries are often more informative and clear than numerical summaries.  Let's see what `visreg` provides:
 
 
 ```r
-visreg(fit, "Wind")
+par(mfrow=c(1,3))
+visreg(fit)
 ```
 
-![plot of chunk wind](img/basic-wind-1.png)
+<img src="img/basic-all3-1.png" title="plot of chunk all3" alt="plot of chunk all3" width="100%" />
+
+If you're looking at the plots interactively in something like RStudio, you can click through the plots one by one.  You can also recreate these figures indivually with
 
 
 ```r
 visreg(fit, "Solar.R")
+visreg(fit, "Wind")
+visreg(fit, "Temp")
+```
+
+The visual summaries reinforce the numeric ones: Temperature has an undeniable positive association with ozone, wind a clear negative association, and the effect of solar radiation is just barely significant.  For example, if we add a horizontal like to the solar radiation plot:
+
+
+```r
+visreg(fit, "Solar.R")
+abline(h=44.5, lty=2)
 ```
 
 ![plot of chunk solar](img/basic-solar-1.png)
 
-The visual summaries reinforce the numeric ones: Wind has an undeniable negative association with ozone, whereas the effect of solar radiation is just barely significant: you can try adding `abline(h=44.5, lty=2)` to the above plot to see that the gray band just barely excludes a flat line.
+we can see that the gray band just barely excludes a flat line.
 
-All aspects of the above plot (the line, the partial residuals, the band) depend on the specification of not only `Solar.R` but also of all the other terms in the model.  In other words, the result is fully conditional on all components of the predictor; in `visreg`, this type of plot is called a *conditional* plot, and it is the default type.  By default, the other terms in the model are set to their median if the term is numeric or the most common category if the term is a factor.  Changing these defaults is disucssed in [conditioning](conditioning.html).
+All aspects of the above plot (the blue line, the partial residuals, the band) depend on the specification of not only `Solar.R` but also of all the other terms in the model.  In other words, the result is fully conditional on all components of the predictor; in `visreg`, this type of plot is called a *conditional* plot, and it is the default type.  By default, the other terms in the model are set to their median if the term is numeric or the most common category if the term is a factor.  Changing these defaults is disucssed in [conditioning](conditioning.html).
 
 In addition to continuous explanatory variables, `visreg` also allows the easy visualization of differences between the levels of categorical variables.  The following block of code creates a factor called `Heat` by discretizing `Temp`, and then visualizes its relationship with `Ozone`:
 
