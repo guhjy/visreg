@@ -1,0 +1,19 @@
+---
+---
+
+```{r include=FALSE}
+library(visreg)
+opts_knit$set(aliases=c(h = 'fig.height', w = 'fig.width'))
+opts_knit$set(global.par=TRUE)
+opts_chunk$set(fig.path='img/mixed-')
+```
+```{r fake, echo=FALSE, results='hide'}
+par(mar=c(5,5,0.5,0.5))
+plot(1:10)
+```
+
+example
+
+contrast plot
+
+panel by random intercept

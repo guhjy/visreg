@@ -3,9 +3,9 @@
 
 
 
-As was the case with [nonlinear terms](trans), the relationship between `x` and `y` in a model with interactions also (typically) depends on multiple coefficients and thus, a visual summary tends to be much more readily understood than a numeric one.
+As was the case with [nonlinear terms](trans.html), the relationship between `x` and `y` in a model with interactions also (typically) depends on multiple coefficients and thus, a visual summary tends to be much more readily understood than a numeric one.
 
-For models with interactions, we must simultaneously visualize the effect of two explanatory variables.  The `visreg` package offers two methods for doing so; this page describes what we call *cross-sectional plots*, which plot one-dimensional relationships between the response and one predictor for several values of another predictor.  The package also provides methods for constructing [*surface plots*](surface.html), which attempt to provide a picture of the regression surface over both dimensions simultaneously.
+For models with interactions, we must simultaneously visualize the effect of two explanatory variables.  The `visreg` package offers two methods for doing so; this page describes what we call *cross-sectional plots*, which plot one-dimensional relationships between the response and one predictor for several values of another predictor, either in separate panels or [overlaid on top of one another](overlay.html).  The package also provides methods for constructing [*surface plots*](surface.html), which attempt to provide a picture of the regression surface over both dimensions simultaneously.
 
 Let's fit a model that involves an interaction between a continuous term and a categorical term:
 

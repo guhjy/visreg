@@ -44,9 +44,9 @@ visreg(fit, "bili", "hepato", ylab="log(Hazard ratio)")
 
 ![plot of chunk cox](img/index-cox-1.png)
 
-In this plot, we see how the hazard changes as a function of bilirubin levels for patients with/without an enlarged liver.  For more on this type of plot, see [Cross-sectional plots](cross).  
+In this plot, we see how the hazard changes as a function of bilirubin levels for patients with/without an enlarged liver.  For more on this type of plot, see [Cross-sectional plots](cross.html).  
 
-<div id="gam"></div>
+<a class="anchor" id="gam"></a>
 
 The models do not have to be linear, and we have the option of using `ggplot2` as the graphics engine:
 

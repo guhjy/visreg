@@ -12,13 +12,13 @@ par(mar=c(5,5,0.5,0.5))
 plot(1:10)
 ```
 
-Conditional plots were discussed in [getting started](basic).  The downside of a conditional plot is that all of the terms in the model must be specified -- i.e., to plot the relationship between wind and ozone, we also need to specify a value for temperature (or use the median as a default).  Specifically, letting $x$ denote the predictor of interest, $y$ the outcome, and $\xj$ the other predictors in the model, a conditional plot represents the relationship $f(x) = \Ex(Y\|x, \xj)$.
+Conditional plots were discussed in [getting started](basic.html).  The downside of a conditional plot is that all of the terms in the model must be specified -- i.e., to plot the relationship between wind and ozone, we also need to specify a value for temperature (or use the median as a default).  Specifically, letting $x$ denote the predictor of interest, $y$ the outcome, and $\xj$ the other predictors in the model, a conditional plot represents the relationship $f(x) = \Ex(Y\|x, \xj)$.
 
-As an alternative, we could consider relative changes, or as they are called in statistics, *contrasts*.  To be specific, let $x_0$ denote a reference value for, e.g., wind, and consider plotting $f(x) = \Ex(Y\|x) - \Ex(Y\|x\_0)$.  Readers who have taken a course in regression will recognize that this is one of the defining characteristics of a *regression* model: a one-unit change in $x$ has the same effect on $\Ex(Y)$ regardless of what the other terms in the model are.  Models outside the regression framework, such as [random forests and support vector machines](blackbox), do not have this property, and therefore, may only be visualized with conditional plots.
+As an alternative, we could consider relative changes, or as they are called in statistics, *contrasts*.  To be specific, let $x_0$ denote a reference value for, e.g., wind, and consider plotting $f(x) = \Ex(Y\|x) - \Ex(Y\|x\_0)$.  Readers who have taken a course in regression will recognize that this is one of the defining characteristics of a *regression* model: a one-unit change in $x$ has the same effect on $\Ex(Y)$ regardless of what the other terms in the model are.  Models outside the regression framework, such as [random forests and support vector machines](blackbox.html), do not have this property, and therefore, may only be visualized with conditional plots.
 
 To summarize, the primary advantage of a contrast plot is that we don't have to specify $\xj$, while the primary disadvantage is that we have to specify a reference value $\x_0$.  By default, the reference value in `visreg` for a numeric variable is its mean, and for a factor its first, or reference, level.
 
-To see how contrast plots compare to conditional plots, let's fit the same model as in [getting started](basic), but display contrast plots and conditional plots side-by-side:
+To see how contrast plots compare to conditional plots, let's fit the same model as in [getting started](basic.html), but display contrast plots and conditional plots side-by-side:
 
 ```{r contrast_vs_conditional, h=4, w=8, cache=TRUE}
 airquality$Heat <- cut(airquality$Temp, 3, labels=c("Cool", "Mild", "Hot"))
@@ -38,4 +38,4 @@ In these documentation pages, we focus primarily on conditional plots to avoid d
 
 * Logistic regression applied to case-control studies: In such studies, the estimation of the intercept parameter is typically meaningless, so conditional plots are of questionable value.  Contrast plots, however, are still meaningful ways to visualize the model's estimates.
 * Cox relative risk (proportional hazards) models: Likewise, in Cox models, the baseline hazard is not estimated and plots of absolute risk are dubious, but contrast plots still useful.
-* [Random effect models](random-effect): Most random effect modeling software cannot account for uncertainty in the random effects when calculating standard errors for $\Ex(Y)$.  Thus, while conditional plots may still be constructed, they will lack confidence intervals.  In contrast plots, these terms drop out, and confidence intervals may still be constructed.
+* [Random effect models](mixed.html): Most random effect modeling software cannot account for uncertainty in the random effects when calculating standard errors for $\Ex(Y)$.  Thus, while conditional plots may still be constructed, they will lack confidence intervals.  In contrast plots, these terms drop out, and confidence intervals may still be constructed.

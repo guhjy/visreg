@@ -3,7 +3,7 @@
 
 
 
-[Getting started](basic) described how `visreg` provides a visual summary of a model, somewhat akin to the numerical summary you get from `summary(fit)`.  For nonlinear terms, however, it is usually difficult to interpret numerical summaries, and visual representations become far more important.
+[Getting started](basic.html) described how `visreg` provides a visual summary of a model, somewhat akin to the numerical summary you get from `summary(fit)`.  For nonlinear terms, however, it is usually difficult to interpret numerical summaries, and visual representations become far more important.
 
 # Nonlinear terms
 
@@ -48,7 +48,7 @@ If you ever run across a kind of transformation that produces an error in `visre
 
 # Transformations of the outcome
 
-Another kind of nonlinear model arises when the outcome is transformed, but we are interested in plotting the relationship on the original scale.  For example, ozone levels must be positive.  However, the <a href="index.html#gam">GAM on the front page</a> illustrates, some models may result in predictions or confidence band that fall below 0.  One way of remedying this is to model the log of ozone concentrations instead of the ozone concentrations directly:
+Another kind of nonlinear model arises when the outcome is transformed, but we are interested in plotting the relationship on the original scale.  For example, ozone levels must be positive.  However, as the [GAM on the front page](index.html#gam) illustrates, some models may result in predictions or confidence band that fall below 0.  One way of remedying this is to model the log of ozone concentrations instead of the ozone concentrations directly:
 
 
 ```r
