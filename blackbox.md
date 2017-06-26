@@ -3,7 +3,7 @@
 
 
 
-As the name implies, `visreg` is primarily designed to visualize regression models.  However, it is also compatible with any formula-based model class that supplies a `predict` method, which includes models such as random forests and support vector machines.  Such methods are often thought of as ``black boxes'', but {\tt visreg} offers a convenient way to visualize the resulting fit and possibly gain some insight into the model.  Some of these packages do not automatically handle missing data, so we first create a complete-case data set:
+As the name implies, `visreg` is primarily designed to visualize regression models.  However, it is also compatible with any formula-based model class that supplies a `predict` method, which includes models such as random forests and support vector machines.  Such methods are often thought of as ``black boxes'', but `visreg` offers a convenient way to visualize the resulting fit and possibly gain some insight into the model.  Some of these packages do not automatically handle missing data, so we first create a complete-case data set:
 
 
 ```r

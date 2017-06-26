@@ -36,9 +36,9 @@ Or alternatively, see how the effect of temperature depends on the wind level:
 visreg(fit, "Heat", by="Wind", layout=c(3,1))
 ```
 
-Note that by default, `visreg` sets up three panels and uses the `lattice` package to lay out the panels.  Thus, in order to change the appearance of these sorts of plots, you may have to read the `lattice` documentation for the relevant options, such as `layout` in the above examples.
+Note that, since `Wind` is a continuous variable, the panels above are somewhat arbitrary.  By default, `visreg` sets up three panels using the 10th, 50th, and 90th percentiles, but [the user can change both the number and the location of these break points](#opt).
 
-Alternatively, you can use [`ggplot2`](gg.html) as the graphics engine by specifying `gg=TRUE`:
+By default, `visreg` uses the `lattice` package to lay out the panels.  Thus, in order to change the appearance of these sorts of plots, you may have to read the `lattice` documentation for the relevant options, such as `layout` in the above examples.  Alternatively, you can use [`ggplot2`](gg.html) as the graphics engine by specifying `gg=TRUE`:
 
 ```{r wind_heat_gg, h=4, w=9, cache=TRUE}
 visreg(fit, "Wind", by="Heat", gg=TRUE)
@@ -50,9 +50,11 @@ visreg(fit, "Heat", by="Wind", gg=TRUE)
 
 In all of these plots, note that each partial residuals appears exactly once in the plot, in the panel it is closest to.
 
+<a class="anchor" id="opt"></a>
+
 # Options
 
-For a numeric `by` variable, the `breaks` argument controls the values at which the cross-sections are taken. By default, cross-sections are taken at the 10th, 50th, and 90th quantiles. If breaks is a single number, it specifies the number of breaks:
+For a numeric `by` variable, the `breaks` argument controls the values at which the cross-sections are taken. By default, cross-sections are taken at three quantiles (10th, 50th, and 90th), but a larger number can be specified:
 
 ```{r breaks, h=3.5, w=12, cache=TRUE}
 visreg(fit, "Heat", by="Wind", breaks=4, layout=c(4,1))

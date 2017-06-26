@@ -14,7 +14,7 @@ airquality$Heat <- cut(airquality$Temp,3,labels=c("Cool","Mild","Hot"))
 fit <- multinom(Heat ~ Wind + Ozone, airquality)
 ```
 
-By default, `visreg(fit, "Ozone")` would create three separate plots, one for each level of the outcome, `Heat`.  By specifying `collapse=TRUE`, we collapse the list down to a single `visreg` object which can be plotted using the [methods](cross.htmp) [described](overlay.html) [here](surface.html).  For example:
+By default, `visreg(fit, "Ozone")` would create three separate plots, one for each level of the outcome, `Heat`.  By specifying `collapse=TRUE`, we collapse the list down to a single `visreg` object which can be plotted using the [methods](cross.html) [described](overlay.html) [here](surface.html).  For example:
 
 
 ```r
