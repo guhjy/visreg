@@ -1,5 +1,5 @@
 # Site settings
-title: "visreg: An R package for the visualization of regression models"
+title: visreg
 email: patrick-breheny@uiowa.edu
 description: "visreg: An R package for the visualization of regression models"
 url: "http://pbreheny.github.io/visreg"
