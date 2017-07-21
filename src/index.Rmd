@@ -15,8 +15,6 @@ plot(1:10)
 
 This site focuses mainly on illustrating the ideas and syntax of `visreg` as a way of providing online documentation.  For more on the technical details of `visreg`, [see the (hopefully soon-to-be published) article](http://myweb.uiowa.edu/pbreheny/publications/visreg.pdf).
 
-NOTE: This site is under construction at the moment, but new material is being added daily.
-
 # Installation
 
 `visreg` is on CRAN, so it can be installed via:
