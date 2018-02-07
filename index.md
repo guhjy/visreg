@@ -4,7 +4,7 @@
 
 `visreg` is an R package for displaying the results of a fitted model in terms of how a predictor variable `x` is estimated to affect an outcome `y`.  The implementation of `visreg` takes full advantage of object-oriented programming in R, meaning that it works with virtually any type of (formula-based) model class in R provided that the model class provides a `predict` method.
 
-This site focuses mainly on illustrating the ideas and syntax of `visreg` as a way of providing online documentation.  For more on the technical details of `visreg`, [see the published article](https://journal.r-project.org/archive/2017/RJ-2017-046/index.html).
+This site focuses mainly on illustrating the ideas and syntax of `visreg` as a way of providing online documentation.  For more on the technical details of `visreg`, [see the (hopefully soon-to-be published) article](http://myweb.uiowa.edu/pbreheny/publications/visreg.pdf).
 
 # Installation
 
@@ -44,7 +44,7 @@ visreg(fit, "bili", "hepato", ylab="log(Hazard ratio)")
 
 In this plot, we see how the hazard changes as a function of bilirubin levels for patients with/without an enlarged liver.  For more on this type of plot, see [Cross-sectional plots](cross.html).  
 
-<a class="anchor" id="gam"></a>
+<a id="gam" class="anchor"></a>
 
 The models do not have to be linear, and we have the option of using `ggplot2` as the graphics engine:
 
