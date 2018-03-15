@@ -113,3 +113,24 @@ visreg(fit, "Heat", whitespace=.5)
 ```
 
 ![plot of chunk whitespace](img/options-whitespace-1.png)
+
+# Subsetting the plot
+
+Occasionally, you might want to plot only a subset of the levels or observations; you can use `subset` to accomplish this:
+
+
+```r
+v <- visreg(fit, "Wind", by="Heat", plot=FALSE)
+v1 <- subset(v, Heat %in% c("Cool", "Hot"))
+plot(v1)
+```
+
+![plot of chunk subset_1](img/options-subset_1-1.png)
+
+
+```r
+v2 <- subset(v, Wind < 15)
+plot(v2, layout=c(3,1))
+```
+
+![plot of chunk subset_2](img/options-subset_2-1.png)

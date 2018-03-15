@@ -11,12 +11,22 @@ This page contains miscellaneous questions that I have been asked about visreg, 
 
 # Q: In `visreg2d`, is it possible to superimpose data points onto the plot?
 
-This is actually kind of complicated, just because of how `filled.contour()` works and the way in which it actually creates two plots, one main plot and one plot for the legend.  To superimpose a scatterplot onto the contour plot, you'll need to do something like this:
+Yes; it's probably easiest to do this using `ggplot2` to render the surface:
 
 
 ```r
 fit <- lm(Ozone ~ Solar.R + Wind + Temp + I(Wind^2) + I(Temp^2) + I(Wind*Temp)+I(Wind*Temp^2) + 
           I(Temp*Wind^2) + I(Temp^2*Wind^2), data=airquality)
+visreg2d(fit, x="Wind", y="Temp", plot.type="gg") +
+  geom_point(aes(Wind, Temp), data=subset(airquality, !is.na(Ozone)), col='gray50')
+```
+
+![plot of chunk faq_visreg2d_points_gg](img/glm-faq_visreg2d_points_gg-1.png)
+
+You can do it with base R graphics too, but it's kind of complicated because of how `filled.contour()` works and the way in which it actually creates two plots, one main plot and one plot for the legend:
+
+
+```r
 p <- quote({
   axis(1, at = mx, labels = lx)
   axis(2, at = my, labels = ly)
@@ -27,7 +37,7 @@ visreg2d(fit, x="Wind", y="Temp", plot.type="image", plot.axes=p)
 
 ![plot of chunk faq_visreg2d_points](img/glm-faq_visreg2d_points-1.png)
 
-Doing this through the axes is admittedly very weird -- it's not my idea; see `?filled.contour`.  At one point I had experimented with having some options for this kind of thing in visreg2d, but could never arrive at a plot that looked good to me.
+Doing this through the axes is admittedly very weird -- it's not my idea; see `?filled.contour`.
 
 # Q: Does `visreg` work with `gamm` (mgcv) or `gamm4` objects?
 
@@ -91,3 +101,15 @@ visreg(fit$gam, 'x', trans=binomial()$linkinv, ylab="Probability")
 ```
 
 ![plot of chunk faq_gamm2](img/glm-faq_gamm2-1.png)
+
+# Q: Can I have the response variable on the horizontal axis instead of the vertical axis?
+
+You can achieve this via `ggplot2::coord_flip`:
+
+
+```r
+fit <- lm(Ozone ~ Solar.R + Wind + Temp, data=airquality)
+visreg(fit, "Wind", gg=TRUE) + coord_flip()
+```
+
+![plot of chunk faq_coord_flip](img/glm-faq_coord_flip-1.png)
