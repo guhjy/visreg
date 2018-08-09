@@ -1,5 +1,5 @@
 all: src/*.Rmd img/rgl.html css/main.css
-	knitall --only-newer src/*.Rmd
+	knitall -k --only-newer src/*.Rmd
 	sed -i '/chunk fake/d' *.md
 	rm -f img/*-fake-*
 	jekyll b
